@@ -7,18 +7,20 @@
   </head>
   <body>
     <main>
+      <header>
+        <h1>Login Page</h1>
+      </header>
       <section>
-        <form action="/sign-up" method="post">
-          <label for="">email</label>
-          <input type="email" name="email" id="" autocomplete="off" /><br />
-          <% if (err) { %> <%= err %>
-          <br />
-          <% } %>
-          <label for="">password</label>
-          <input type="password" name="password" id="" /><br />
-          <button>submit</button>
-        </form>
+        <a href="/sign-up">register</a>
       </section>
     </main>
   </body>
+  <script>
+    let obj = {};
+    document.cookie.split(";").map((c) => {
+      let kV = c.split("=");
+      obj[kV[0]] = kV[1];
+    });
+    console.log(obj);
+  </script>
 </html>

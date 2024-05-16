@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <main>
+      <header>
+        <h1>Sign up page</h1>
+      </header>
+      <section>
+        <form action="/sign-up" method="post">
+          <label for="">email</label>
+          <input type="email" name="email" autocomplete="off" /><br />
+          <% if (err) { %> <%= err %>
+          <br />
+          <% } %>
+          <label for="">password</label>
+          <input type="password" name="password" id="" /><br />
+          <button>submit</button>
+        </form>
+      </section>
+    </main>
+    <script>
+      console.log(document.cookie);
+      document.cookie = "text=";
+      document.cookie = "cast=";
+    </script>
+  </body>
+</html>
