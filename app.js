@@ -19,9 +19,10 @@ app.use(express.urlencoded({ extended: false }));
 app.set("view engine", "ejs");
 
 app.get("/", (req, res) => {
-  console.log(req.headers.cookie);
-  res.cookie("cast", "");
-  res.render("login", { err: error });
+  res.render("login", {
+    emailErr: error.emailErr,
+    passwordErr: error.passwordErr,
+  });
   error = "";
 });
 
@@ -35,7 +36,7 @@ app.post("/sign-up", (req, res) => {
     (err, data) => {
       if (err) {
         error = "email already in use ";
-        res.redirect("/");
+        res.redirect("/sign-up");
         return;
       }
       res.redirect("/");
@@ -43,4 +44,28 @@ app.post("/sign-up", (req, res) => {
   );
 });
 
+app.post("/signIn", (req, res) => {
+  const { email, password } = req.body;
+  connection.query(
+    `select * from users where email = '${email}'`,
+    (err, data) => {
+      if (!data.length) {
+        error = {
+          emailErr: "email doesnt exist",
+          passwordErr: "",
+        };
+        res.redirect("/");
+        return;
+      }
+      const dbPassword = data[0].password;
+      if (dbPassword != password) {
+        error = { emailErr: "", passwordErr: "password doesnt match" };
+        res.redirect("/");
+        return;
+      }
+      res.send("login was a success");
+    }
+  );
+  console.log(email, password);
+});
 app.listen(8000);
