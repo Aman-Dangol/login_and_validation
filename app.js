@@ -66,6 +66,5 @@ app.post("/signIn", (req, res) => {
       res.send("login was a success");
     }
   );
-  console.log(email, password);
 });
 app.listen(8000);
