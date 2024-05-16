@@ -4,6 +4,8 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Document</title>
+
+    <link rel="stylesheet" href="/public/css/style.css" />
   </head>
   <body>
     <main>
@@ -13,20 +15,19 @@
       <section>
         <form action="/signIn" method="post">
           <label for="">email</label>
-          <input type="email" name="email" /> <br />
-          <% if (emailErr) { %> <%=emailErr %> <br />
+          <input type="email" name="email" />
+          <% if (emailErr) { %> <span></span>
+          <span class="err"><%=emailErr %></span>
           <% } %>
           <label for="">password</label>
-          <input type="password" name="password" /> <br />
+          <input type="password" name="password" />
 
-          <% if (passwordErr) { %> <%=passwordErr %> <br />
-          <% } %>
+          <% if (passwordErr) { %> <span></span>
+          <span class="err"><%=passwordErr %> <% } %> </span>
           <button>Login</button>
         </form>
       </section>
-      <section>
-        <a href="/sign-up">register</a>
-      </section>
+      <section>create new account ? <a href="/sign-up">register</a></section>
     </main>
   </body>
 </html>
