@@ -1,6 +1,8 @@
 const express = require("express");
 // setting up database
 const mysql = require("mysql");
+const cookieParser = require("cookie-parser");
+const { auth } = require("./auth.js");
 const connection = mysql.createConnection({
   host: "localhost",
   user: "aman",
@@ -13,9 +15,9 @@ const app = express();
 let error = "";
 
 app.use(express.json());
+app.use(cookieParser());
 app.use(express.urlencoded({ extended: false }));
 app.use("/public", express.static("./public"));
-
 // set up view engine
 app.set("view engine", "ejs");
 
@@ -64,8 +66,13 @@ app.post("/signIn", (req, res) => {
         res.redirect("/");
         return;
       }
+      res.cookie("uid", data[0].id);
       res.send("login was a success");
     }
   );
+});
+
+app.get("/home", auth, (req, res) => {
+  res.send("home page");
 });
 app.listen(8000);
