@@ -20,7 +20,7 @@ app.use(express.urlencoded({ extended: false }));
 app.use("/public", express.static("./public"));
 // set up view engine
 app.set("view engine", "ejs");
-
+app.use("/home/", auth);
 app.get("/", (req, res) => {
   res.render("login", {
     emailErr: error.emailErr,
@@ -72,7 +72,7 @@ app.post("/signIn", (req, res) => {
   );
 });
 
-app.get("/home", auth, (req, res) => {
+app.get("/home", (req, res) => {
   res.send("home page");
 });
 app.listen(8000);
