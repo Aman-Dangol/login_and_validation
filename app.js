@@ -20,7 +20,7 @@ app.use(express.urlencoded({ extended: false }));
 app.use("/public", express.static("./public"));
 // set up view engine
 app.set("view engine", "ejs");
-app.use(/\/[A-Za-z]+/, auth);
+app.use(/\/.+/, auth);
 app.get("/", (req, res) => {
   res.render("login", {
     emailErr: error.emailErr,
