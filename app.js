@@ -20,8 +20,12 @@ app.use(express.urlencoded({ extended: false }));
 app.use("/public", express.static("./public"));
 // set up view engine
 app.set("view engine", "ejs");
-app.use(/\/.+/, auth);
+app.use(/^\/(?!login$|sign-up$|signIn$).*$/, auth);
 app.get("/", (req, res) => {
+  res.render("home");
+});
+app.get("/login", (req, res) => {
+  // console.log(req.cookies);
   res.render("login", {
     emailErr: error.emailErr,
     passwordErr: error.passwordErr,
@@ -67,12 +71,13 @@ app.post("/signIn", (req, res) => {
         return;
       }
       res.cookie("uid", data[0].id);
-      res.send("login was a success");
+      res.redirect("/");
     }
   );
 });
 
-app.get("/home", (req, res) => {
-  res.send("home page");
+app.get("/logout", (req, res) => {
+  res.cookie("uid", "");
+  res.redirect("/");
 });
 app.listen(8000);

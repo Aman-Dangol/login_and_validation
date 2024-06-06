@@ -15,7 +15,11 @@
       <section>
         <form action="/signIn" method="post">
           <label for="">email</label>
-          <input type="email" name="email" />
+          <input
+            type="email"
+            name="email"
+            pattern="[a-z0-9._%+\-]+@[a-z0-9.\-]+\.[a-z]{2,}$"
+          />
           <% if (emailErr) { %> <span></span>
           <span class="err"><%=emailErr %></span>
           <% } %>

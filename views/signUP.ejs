@@ -14,7 +14,12 @@
       <section>
         <form action="/sign-up" method="post">
           <label for="">email</label>
-          <input type="email" name="email" autocomplete="off" />
+          <input
+            type="email"
+            name="email"
+            autocomplete="off"
+            pattern="[a-z0-9._%+\-]+@[a-z0-9.\-]+\.[a-z]{2,}$"
+          />
           <% if (err) { %> <span></span> <span class="err"><%= err %></span>
           <% } %>
           <label for="">password</label>
